@@ -10,12 +10,7 @@
   
   <!-- Welcome Page -->
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>Pages/index.xhtml</welcome-file>
   </welcome-file-list>
   
   <!-- Staring JSF -->
@@ -28,7 +23,7 @@
   <!-- JSF URL mapping -->
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
+    <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   
   <context-param>
