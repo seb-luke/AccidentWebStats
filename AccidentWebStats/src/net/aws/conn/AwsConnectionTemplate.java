@@ -17,7 +17,12 @@ import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 
 /**
  * @author Sebastian Luca
- *
+ * The AwsConnectionTemplate class will take care of connecting to the database 
+ * using pooled connection and executing a SQL statement via Prepared Statement 
+ * to avoid SQL Injection. 
+ * It is created as an abstract class that can be extended for different SQL queries.
+ * It is important to set the PreparedStatement variable when extending the
+ * abstract method setPreparedStatement
  */
 public abstract class AwsConnectionTemplate {
 	
@@ -25,10 +30,10 @@ public abstract class AwsConnectionTemplate {
 	private static final String user = "AWS";
 	private static final String pwd = "qwerty";
 	
-	private PreparedStatement preStatement = null;
-	private ResultSet result = null;
-	private PooledConnection pconn = null; 
-	private Connection conn = null;
+	protected PreparedStatement preStatement = null;
+	private   ResultSet result = null;
+	private   PooledConnection pconn = null; 
+	private   Connection conn = null;
 	
 	
 	/**
@@ -46,6 +51,15 @@ public abstract class AwsConnectionTemplate {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		//Set the Statement with an empty String
+		//Should be extended in child class to send
+		//a real query
+		try {
+			setPreparedStatement("");
+		} catch (SQLException e1) {
+			e1.getMessage();
 		}
 		
 		//Execute the prepared statement
@@ -69,6 +83,10 @@ public abstract class AwsConnectionTemplate {
 
 	/**
 	 * @throws SQLException
+	 * This method connects to the Oracle Database
+	 * using the static final credentials set in the class.
+	 * This way it will generate the connection object needed
+	 * to query the database
 	 */
 	private void connectToOracle() throws SQLException {
 		OracleConnectionPoolDataSource ocpds = new OracleConnectionPoolDataSource();
@@ -81,8 +99,14 @@ public abstract class AwsConnectionTemplate {
 		conn = pconn.getConnection();
 	}
 	
-	protected void setPreparedStatement(PreparedStatement preStatement) {
-		this.preStatement = preStatement;
+	/**
+	 * This method needs to be extended in the child classes.
+	 * It is important that, when doing so, the preStatement
+	 * @throws SQLException 
+	 * 
+	 */
+	private void setPreparedStatement(String query) throws SQLException {
+		preStatement = conn.prepareStatement(query);
 	}
 	
 	private void executeStatement() throws MissingStatementException, PreparedSQLException {
