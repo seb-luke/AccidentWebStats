@@ -14,15 +14,15 @@ import java.util.Properties;
  */
 public class GetProperyValues {
 
-	public static Properties getPropValue(String propFileName) throws IOException {
+	public Properties getPropValue(String propFileName) throws IOException {
 		Properties prop = new Properties();
 		
-		InputStream inStream = GetProperyValues.class.getResourceAsStream(propFileName);
+		InputStream inStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 		
 		if( inStream != null ) {
 			prop.load(inStream);
 		} else {
-			throw new FileNotFoundException("Property File " + propFileName + "not found in classpath");
+			throw new FileNotFoundException("Property File " + propFileName + " not found in classpath");
 		}
 		
 		return prop;
