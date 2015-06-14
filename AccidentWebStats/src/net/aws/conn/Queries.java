@@ -16,9 +16,10 @@ public class Queries {
 	private static final String propFileName = "query.properties";
 
 	/**
-	 * @param  queryType	The key describing the needed query from the property file
-	 * @return				Returns a String representing the requested query from the property file
-	 * @throws IOException	If the requested query property file could not be found.
+	 * @param  queryType	key corresponding to the requested query
+	 * @return				a String containing requested query
+	 * @throws IOException	the requested query property file could not be found.
+	 * This method is used to take the query from the properties file.
 	 */
 	public static String getQuery(String queryType) throws IOException {
 		return new GetProperyValues().getPropValue(propFileName).getProperty(queryType);
