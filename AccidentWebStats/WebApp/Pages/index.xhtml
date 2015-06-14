@@ -6,20 +6,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"> 
-	
-<!-- <ui:composition template="">
-	<ui:define name="header">
-	    Add your header here or delete to use the default
-	</ui:define>
-	<ui:define name="content">
-	    Add your content here or delete to use the default
-	</ui:define>
-	<ui:define name="footer">
-	    Add your footer here or delete to use the default
-	</ui:define>
-</ui:composition> -->
+
 <h:head>
-	<title>Tryout</title>
+	<title>Accident Reporting</title>
 	<h:outputScript library="default" name="js/geoLocation.js"></h:outputScript>
 </h:head>
 <body>
@@ -28,7 +17,7 @@
 	<h:form>			
 		<p:remoteCommand name="saveCoordToBean" process="@this" update="msgs" actionListener="#{coordinates.getCoord}"/>
 		<p:growl id="msgs" showDetail="true"/>
-		<p:commandButton type="button" onclick="getLocationConstant()" value="Announce accident" icon="ui-icon-info"/>
+		<p:commandButton type="button" onclick="getLocationConstant()" value="Report accident" icon="ui-icon-info"/>
 	</h:form>
 	
 	
