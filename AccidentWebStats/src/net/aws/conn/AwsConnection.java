@@ -12,21 +12,20 @@ import java.sql.SQLException;
 import javax.sql.PooledConnection;
 
 import net.aws.exception.MissingStatementException;
-import net.aws.exception.PreparedSQLException;
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 
 /**
- * @author Sebastian Luca
  * The AwsConnectionTemplate class will take care of connecting to the database 
  * using pooled connection and executing a SQL statement via Prepared Statement 
  * to avoid SQL Injection. 
  * It is created as an abstract class that can be extended for different SQL queries.
  * It is important to set the PreparedStatement variable when extending the
  * abstract method setPreparedStatement
+ * @author Sebastian Luca
  */
-public abstract class AwsConnection {
+public class AwsConnection {
 	
-	private static final String url = "jdbc:oracle:thin@localhost:1521:starterOracl";
+	private static final String url = "jdbc:oracle:thin:@localhost:1521:starterOracl";
 	private static final String user = "AWS";
 	private static final String pwd = "qwerty";
 	
@@ -82,7 +81,7 @@ public abstract class AwsConnection {
 		preStatement = conn.prepareStatement(query);
 	}
 	
-	private void executeStatement() throws MissingStatementException, PreparedSQLException {
+/*	private void executeStatement() throws MissingStatementException, PreparedSQLException {
 		
 		if(preStatement == null) throw new MissingStatementException();
 		
@@ -91,7 +90,7 @@ public abstract class AwsConnection {
 		} catch (SQLException e) {
 			throw new PreparedSQLException();
 		}
-	}
+	}*/
 	
 	/**
 	 * Takes the latitude and longitude as parameters and inserts them into the Database.
@@ -104,18 +103,36 @@ public abstract class AwsConnection {
 	 * @throws SQLException in case the builded query has errors
 	 * @throws MissingStatementException in case the statement execution fails
 	 */
-	public ResultSet insertCoordinates(String latitude, String longitude) throws IOException, SQLException, MissingStatementException {
+	public int insertCoordinates(String latitude, String longitude) throws IOException, SQLException, MissingStatementException {
 		String queryKey = "insert_coord";
 
 		String query = Queries.getQuery(queryKey);
 		setPreparedStatement(query);
 		
-		preStatement.setString(0, latitude);
-		preStatement.setString(1, longitude);
+		System.out.println(query);
 		
-		executeStatement();
+		preStatement.setDouble(1, Double.parseDouble(latitude));
+		preStatement.setDouble(2, Double.parseDouble(longitude));		
 		
-		return result;
+		return preStatement.executeUpdate();
+	}
+
+
+	public void closeConn() throws SQLException {
+		if(result != null) result.close();
+		conn.close();
+		pconn.close();		
+	}
+	
+	public int testConn() throws SQLException {
+		preStatement = conn.prepareStatement("INSERT INTO AWS_COORDINATES(COORD,TIMESTAMP,HITS)" +
+				"VALUES( SDO_GEOMETRY(2001, 8307, SDO_POINT_TYPE (?, ?, NULL), NULL, NULL), SYSDATE, 1)");
+		
+		preStatement.setDouble(1, Double.parseDouble("45.805091399999995"));
+		preStatement.setDouble(2, Double.parseDouble("45.805091399999995"));
+		return preStatement.executeUpdate();
+
+		//return result;		
 	}
 }
 
