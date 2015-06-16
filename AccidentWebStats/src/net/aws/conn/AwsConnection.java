@@ -86,10 +86,11 @@ public class AwsConnection {
 	 * at the same coordinates. It accesses a SQL UPDATE query which increments by
 	 * one the current hitCount for specified id.
 	 * @param  loc_id is an integer representing the id of the location that needs incrementing
+	 * @return 1 if update was a success and 0 otherwise
 	 * @throws IOException when accessing query properties file
 	 * @throws SQLException when executing operations using Prepared Statement object
 	 */
-	public void incrementHitCount( int loc_id ) throws IOException, SQLException {
+	public int incrementHitCount( int loc_id ) throws IOException, SQLException {
 		String query_key = "incr_hits";
 		String query = Queries.getQuery(query_key);
 		
@@ -97,7 +98,7 @@ public class AwsConnection {
 		preStatement.setInt(1, loc_id);
 		preStatement.setInt(2, loc_id);
 		
-		preStatement.executeUpdate();
+		return preStatement.executeUpdate();
 	}
 	
 	/**

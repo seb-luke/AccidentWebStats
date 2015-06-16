@@ -59,7 +59,7 @@ public class Coordinates {
 			if( awsConn.incrementHitCount(loc_id) != 0)
 				msg = "Coordinates existing. Hit count increased";
 			else
-				msg = "Coordinates existing. Hit count could not be increased!";
+				msg = "Coordinates existing. Hit count could not be increased!"; 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
