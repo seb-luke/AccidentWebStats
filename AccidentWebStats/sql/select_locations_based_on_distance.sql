@@ -1,0 +1,5 @@
+SELECT * FROM AWS_COORDINATES c WHERE
+  sdo_within_distance(C.COORD,
+      SDO_GEOMETRY(2001, 8307, SDO_POINT_TYPE (45.805110899999995,21.2523475, NULL), NULL, NULL),
+      'distance=10 unit=m'
+  ) = 'TRUE';
