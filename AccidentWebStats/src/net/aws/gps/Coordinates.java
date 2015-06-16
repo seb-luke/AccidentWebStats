@@ -28,7 +28,7 @@ public class Coordinates {
 		
 		int hitID;
 		if( (hitID = coordinatesExist(latitude,longitude)) != -1) {
-			increaseHitCount(hitID);
+			increaseHitCount(hitID);				
 		} else {
 			addLocationToDB(latitude,longitude);
 		}
@@ -56,7 +56,10 @@ public class Coordinates {
 	private void increaseHitCount(int loc_id) {
 		awsConn = new AwsConnection();
 		try {
-			awsConn.incrementHitCount(loc_id);
+			if( awsConn.incrementHitCount(loc_id) != 0)
+				msg = "Coordinates existing. Hit count increased";
+			else
+				msg = "Coordinates existing. Hit count could not be increased!";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,7 +67,6 @@ public class Coordinates {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 	private void addLocationToDB(String latitude, String longitude) {
@@ -76,7 +78,7 @@ public class Coordinates {
 			if(result == 1)
 				msg = "Coordinates inserted";
 			else
-				msg = "Coordinates failed to inser";
+				msg = "Coordinates failed to insert";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
