@@ -9,7 +9,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.application.FacesMessage;
 
 import net.aws.conn.AwsConnection;
-import net.aws.exception.MissingStatementException;
 
 @ManagedBean
 public class Coordinates {
@@ -22,14 +21,14 @@ public class Coordinates {
 		String longitude = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("longitude");
 
 		// Reduce the number to 4 digits because devices usually are precise
-		// only to that particular decimal
-		System.out.println("Latitude before: " + latitude);
+		// only to that particular decimal => 11m offset
 		DecimalFormat coordFormater = new DecimalFormat("###.####");
 		latitude = coordFormater.format(Double.parseDouble(latitude));
 		longitude = coordFormater.format(Double.parseDouble(longitude));
 		
-		if( coordinatesExist(latitude,longitude) ) {
-			increaseHitCount(latitude,longitude);
+		int hitID;
+		if( (hitID = coordinatesExist(latitude,longitude)) != -1) {
+			increaseHitCount(hitID);
 		} else {
 			addLocationToDB(latitude,longitude);
 		}
@@ -38,13 +37,33 @@ public class Coordinates {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Response", msg));
 	}
 
-	private boolean coordinatesExist(String latitude, String longitude) {
-		// TODO Auto-generated method stub
-		return false;
+	private int coordinatesExist(String latitude, String longitude) {
+		awsConn = new AwsConnection();
+		int loc_id = -1;
+		try {
+			loc_id = awsConn.getHitCount(latitude, longitude);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return loc_id;
 	}
 
-	private void increaseHitCount(String latitude, String longitude) {
-		// TODO Auto-generated method stub
+	private void increaseHitCount(int loc_id) {
+		awsConn = new AwsConnection();
+		try {
+			awsConn.incrementHitCount(loc_id);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -62,9 +81,6 @@ public class Coordinates {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MissingStatementException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {

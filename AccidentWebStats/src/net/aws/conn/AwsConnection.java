@@ -81,16 +81,50 @@ public class AwsConnection {
 		preStatement = conn.prepareStatement(query);
 	}
 	
-/*	private void executeStatement() throws MissingStatementException, PreparedSQLException {
+	/**
+	 * This method is used to increase the times an accident has been recorded
+	 * at the same coordinates. It accesses a SQL UPDATE query which increments by
+	 * one the current hitCount for specified id.
+	 * @param  loc_id is an integer representing the id of the location that needs incrementing
+	 * @throws IOException when accessing query properties file
+	 * @throws SQLException when executing operations using Prepared Statement object
+	 */
+	public void incrementHitCount( int loc_id ) throws IOException, SQLException {
+		String query_key = "incr_hits";
+		String query = Queries.getQuery(query_key);
 		
-		if(preStatement == null) throw new MissingStatementException();
+		setPreparedStatement(query);
+		preStatement.setInt(1, loc_id);
+		preStatement.setInt(2, loc_id);
 		
-		try {
-			result = preStatement.executeQuery();
-		} catch (SQLException e) {
-			throw new PreparedSQLException();
-		}
-	}*/
+		preStatement.executeUpdate();
+	}
+	
+	/**
+	 * This method queries the database for entries that are 100 meters from specified position.
+	 * If an entry is found, the ID is returned. If not, -1 is returned
+	 * @param latitude represents first Coordinate of current position
+	 * @param longitude represents second Coordinate of current position
+	 * @return and integer representing the ID of the found entry. If no entry is found, -1 is returned
+	 * @throws IOException when accessing query properties file
+	 * @throws SQLException when executing operations using Prepared Statement object
+	 */
+	public int getHitCount(String latitude, String longitude) throws IOException, SQLException {
+		String query_key = "get_hits";
+		
+		String query = Queries.getQuery(query_key);
+		
+		setPreparedStatement(query);
+		preStatement.setDouble(1, Double.parseDouble(latitude));
+		preStatement.setDouble(2, Double.parseDouble(longitude));
+		
+		result = preStatement.executeQuery();
+		if( result.next() ) {
+			return result.getInt(1);
+		}		
+		
+		return -1;
+	}
 	
 	/**
 	 * Takes the latitude and longitude as parameters and inserts them into the Database.
@@ -103,7 +137,7 @@ public class AwsConnection {
 	 * @throws SQLException in case the builded query has errors
 	 * @throws MissingStatementException in case the statement execution fails
 	 */
-	public int insertCoordinates(String latitude, String longitude) throws IOException, SQLException, MissingStatementException {
+	public int insertCoordinates(String latitude, String longitude) throws IOException, SQLException {
 		String queryKey = "insert_coord";
 
 		String query = Queries.getQuery(queryKey);
@@ -113,27 +147,32 @@ public class AwsConnection {
 		
 		preStatement.setDouble(1, Double.parseDouble(latitude));
 		preStatement.setDouble(2, Double.parseDouble(longitude));		
-		
+		System.out.println(latitude + " & " + longitude);
 		return preStatement.executeUpdate();
 	}
 
 
+	/**
+	 * Closes opened connections: PooledConnection, 
+	 * Connection and ResultSet
+	 * @throws SQLException
+	 */
 	public void closeConn() throws SQLException {
 		if(result != null) result.close();
 		conn.close();
 		pconn.close();		
 	}
 	
-/*	public int testConn() throws SQLException {
+	public void testConn() throws SQLException {
 		preStatement = conn.prepareStatement("INSERT INTO AWS_COORDINATES(COORD,TIMESTAMP,HITS)" +
 				"VALUES( SDO_GEOMETRY(2001, 8307, SDO_POINT_TYPE (?, ?, NULL), NULL, NULL), SYSDATE, 1)");
 		
 		preStatement.setDouble(1, Double.parseDouble("45.805091399999995"));
 		preStatement.setDouble(2, Double.parseDouble("45.805091399999995"));
-		return preStatement.executeUpdate();
+		preStatement.executeUpdate();
 
 		//return result;		
-	}*/
+	}
 }
 
 
