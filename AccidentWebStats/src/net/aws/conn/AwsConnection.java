@@ -124,7 +124,7 @@ public class AwsConnection {
 		pconn.close();		
 	}
 	
-	public int testConn() throws SQLException {
+/*	public int testConn() throws SQLException {
 		preStatement = conn.prepareStatement("INSERT INTO AWS_COORDINATES(COORD,TIMESTAMP,HITS)" +
 				"VALUES( SDO_GEOMETRY(2001, 8307, SDO_POINT_TYPE (?, ?, NULL), NULL, NULL), SYSDATE, 1)");
 		
@@ -133,7 +133,7 @@ public class AwsConnection {
 		return preStatement.executeUpdate();
 
 		//return result;		
-	}
+	}*/
 }
 
 
