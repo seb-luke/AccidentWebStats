@@ -16,6 +16,7 @@
 	color:orange;
 }
 
-.body.title{
+#content .title{
 	font-size:32px;
+	color:red;
 }
