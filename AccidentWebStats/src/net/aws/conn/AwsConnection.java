@@ -152,6 +152,31 @@ public class AwsConnection {
 		return preStatement.executeUpdate();
 	}
 
+	public boolean usernameExists(String username) throws IOException, SQLException {
+		String queryKey = "check_uname";
+		
+		String query = Queries.getQuery(queryKey);
+		setPreparedStatement(query);
+		
+		preStatement.setString(1, username);
+		result = preStatement.executeQuery();
+
+		return result.next();
+	}
+
+
+	public boolean emailExists(String email) throws IOException, SQLException {
+		String queryKey = "check_email";
+		
+		String query = Queries.getQuery(queryKey);
+		setPreparedStatement(query);
+		
+		preStatement.setString(1, email);
+		result = preStatement.executeQuery();
+
+		return result.next();
+	}
+
 
 	/**
 	 * Closes opened connections: PooledConnection, 
@@ -162,17 +187,6 @@ public class AwsConnection {
 		if(result != null) result.close();
 		conn.close();
 		pconn.close();		
-	}
-	
-	public void testConn() throws SQLException {
-		preStatement = conn.prepareStatement("INSERT INTO AWS_COORDINATES(COORD,TIMESTAMP,HITS)" +
-				"VALUES( SDO_GEOMETRY(2001, 8307, SDO_POINT_TYPE (?, ?, NULL), NULL, NULL), SYSDATE, 1)");
-		
-		preStatement.setDouble(1, Double.parseDouble("45.805091399999995"));
-		preStatement.setDouble(2, Double.parseDouble("45.805091399999995"));
-		preStatement.executeUpdate();
-
-		//return result;		
 	}
 }
 
