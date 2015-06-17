@@ -5,6 +5,7 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
 	<application>
+		<message-bundle>net.aws.errMsg.Messages</message-bundle>
 		<locale-config>
 			<default-locale>en_US</default-locale>
 			<supported-locale>ro_RO</supported-locale>
@@ -14,5 +15,21 @@
 			<var>msg</var>
 		</resource-bundle>
 	</application>
+	<navigation-rule>
+		<display-name>Pages/admin/createNewUser.xhtml</display-name>
+		<from-view-id>/Pages/admin/createNewUser.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>succes</from-outcome>
+			<to-view-id>/Pages/admin/RegSuccess.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Pages/admin/createNewUser.xhtml</display-name>
+		<from-view-id>/Pages/admin/createNewUser.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/Pages/admin/createNewUser.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>
