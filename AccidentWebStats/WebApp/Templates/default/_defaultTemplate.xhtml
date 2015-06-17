@@ -1,12 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
-  <title><ui:insert name="defaultTitle">Accident Web Stats</ui:insert></title>
-</head>
+<h:head>
+  <title><ui:insert name="defaultTitle">
+  	<h:outputText value="#{msg['header.title']}"/>
+  </ui:insert></title>
+  
+  <h:outputStylesheet library="default" name="default.css"></h:outputStylesheet>
+</h:head>
 
-<body>	
+<h:body>	
 	<div id="header">
 	    <ui:insert name="header">
 	    	<ui:include src="/Templates/default/defaultHeader.html"></ui:include>
@@ -26,6 +31,6 @@
 	  </ui:insert>
 	</div>
 
-</body>
+</h:body>
 
 </html>
