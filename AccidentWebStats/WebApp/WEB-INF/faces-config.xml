@@ -6,8 +6,8 @@
     version="2.2">
 	<application>
 		<locale-config>
-			<default-locale>ro_RO</default-locale>
-			<supported-locale>en_US</supported-locale>
+			<default-locale>en_US</default-locale>
+			<supported-locale>ro_RO</supported-locale>
 		</locale-config>
 		<resource-bundle>
 			<base-name>net.aws.lang.awsLang</base-name>
