@@ -86,12 +86,7 @@ public class Coordinates {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				awsConn.closeConn();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			awsConn.closeConn();
 		}		
 	}
 }

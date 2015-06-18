@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 
 import javax.sql.PooledConnection;
 
@@ -152,6 +153,14 @@ public class AwsConnection {
 		return preStatement.executeUpdate();
 	}
 
+	/**
+	 * Method checks if requested username exists in the database. If that is true, 
+	 * the first row will be found and next() method will return true
+	 * @param username
+	 * @return
+	 * @throws IOException
+	 * @throws SQLException
+	 */
 	public boolean usernameExists(String username) throws IOException, SQLException {
 		String queryKey = "check_uname";
 		
@@ -161,10 +170,20 @@ public class AwsConnection {
 		preStatement.setString(1, username);
 		result = preStatement.executeQuery();
 
-		return result.next();
+		boolean b = result.next();
+		
+		return b;
+		
+		
 	}
 
 
+	/**
+	 * @param email
+	 * @return
+	 * @throws IOException
+	 * @throws SQLException
+	 */
 	public boolean emailExists(String email) throws IOException, SQLException {
 		String queryKey = "check_email";
 		
@@ -174,19 +193,76 @@ public class AwsConnection {
 		preStatement.setString(1, email);
 		result = preStatement.executeQuery();
 
-		return result.next();
+		boolean b = result.next();
+		return b;
+	}
+	
+	/**
+	 * This method adds a new user to the database by running the query saved
+	 * in the properties file. The return is an <code>int</code> that shows the affected number of rows
+	 * @param name the user's name
+	 * @param surname the user's surname
+	 * @param username the new username
+	 * @param email the user's Email address
+	 * @param password the 256 bit hashed password
+	 * @param salt the 256 bit generated security key
+	 * @param permissions the user permission ('adm' for admin / 'usr' for user)
+	 * @param birthdate the date of birth as a <i>String</i>
+	 * @param securityQuestionID the ID for the selected security question
+	 * taken from the security questions table in the database
+	 * @return <code>1</code> if row was inserted or <code>0</code> if insert had an error.
+	 * See {@link java.sql.PreparedStatement#executeUpdate()}
+	 * @throws IOException if method could not read from Query properties file
+	 * @throws SQLException if the run query did not complete. 
+	 */
+	public int insertUser(
+			String name, String surname, String username, String email,
+			String password, String salt, String permissions, Date birthdate, int securityQuestionID) 
+					throws IOException, SQLException {
+		
+		String queryKey = "insert_user";
+		
+		String query = Queries.getQuery(queryKey);
+		setPreparedStatement(query);
+		
+		preStatement.setString(1, email);
+		preStatement.setString(2, name);
+		preStatement.setString(3, surname);
+		preStatement.setString(4, username);
+		preStatement.setString(5, password);
+		preStatement.setString(6, salt);
+		preStatement.setString(7, permissions);
+		preStatement.setDate(8, birthdate);
+		preStatement.setInt(9, securityQuestionID);
+		
+		/*preStatement.setString(1, "mail");
+		preStatement.setString(2, "nume");
+		preStatement.setString(3, "prenume");
+		preStatement.setString(4, "uname");
+		preStatement.setString(5, "parola");
+		preStatement.setString(6, "salt");
+		preStatement.setString(7, "adm");
+		preStatement.setString(8, "01-01-2001");
+		preStatement.setInt(9, 1);*/
+		
+		return preStatement.executeUpdate();
 	}
 
 
 	/**
-	 * Closes opened connections: PooledConnection, 
-	 * Connection and ResultSet
-	 * @throws SQLException
+	 * Closes opened connections: PooledConnection, Connection and ResultSet (if not null)
+	 * Handles SQL Exception cause by closing connections and results
 	 */
-	public void closeConn() throws SQLException {
-		if(result != null) result.close();
-		conn.close();
-		pconn.close();		
+	public void closeConn() {
+		
+		try {
+			if(result != null) result.close();
+			conn.close();
+			pconn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 }
 

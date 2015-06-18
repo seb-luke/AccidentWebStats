@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14341782450660" configfile="/AccidentWebStats/WebApp/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14341782450660" configfile="/AccidentWebStats/WebApp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="Pages/admin/createNewUser.xhtml" x="144" y="246" id="pf14345705174270" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" outlinks="pf14345705174271 pf14345705174272" inlinks="pf14345705174272" path="/Pages/admin/createNewUser.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Pages/admin/RegSuccess.xhtml" x="408" y="246" id="pf14345705174273" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14345705174271" path="/Pages/admin/RegSuccess.xhtml"/>
+  <links id="pf14345705174271" target="pf14345705174273" source="pf14345705174270" outcome="success"/>
+  <links id="pf14345705174272" target="pf14345705174270" source="pf14345705174270" outcome="failure">
+    <bendPoints d1Width="-2" d1Height="-54" d2Width="-2" d2Height="-54"/>
+    <bendPoints d1Width="-143" d1Height="-54" d2Width="-143" d2Height="-54"/>
+    <bendPoints d1Width="-143" d1Height="-1" d2Width="-143" d2Height="-1"/>
+  </links>
+</pageflow:Pageflow>

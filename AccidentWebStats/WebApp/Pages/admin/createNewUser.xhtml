@@ -8,7 +8,60 @@
 
 <ui:composition template="/Templates/default/_defaultTemplate.xhtml">
 	<ui:define name="content">
-	    Add your content here or delete to use the default
+	    <h:outputText value="#{msg['register.new.user']}" styleClass="title"/>
+	    
+	    <h:form>
+	    	<h:messages errorClass="errorMessage" infoClass="infoMessage" warnClass="warnMessage"/>
+	    	<h:panelGrid columns="2">
+	    		<h:outputLabel value="#{msg['form.name']}" for="name"/>
+	    		<h:inputText id="name" value="#{formBean.name}"
+	    		required="true" requiredMessage="#{msg['form.name.req']}" />
+	    		
+	    		<h:outputLabel value="#{msg['form.surname']}" for="surname"/>
+	    		<h:inputText id="surname" value="#{formBean.surname}"
+	    		required="true" requiredMessage="#{msg['form.surname.req']}" />
+	    		
+	    		<h:outputLabel value="#{msg['form.username']}" for="username"/>
+	    		<h:inputText id="username" value="#{formBean.username}"
+	    		required="true" requiredMessage="#{msg['form.username.req']}" />
+	    		
+	    		<h:outputLabel value="#{msg['form.email']}" for="email"/>
+	    		<h:inputText id="email" value="#{formBean.email}"
+	    		required="true" requiredMessage="#{msg['form.email.req']}" >
+	    			<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+	    		</h:inputText>
+	    		
+	    		<h:outputLabel value="#{msg['form.password']}" for="password"/>
+	    		<h:inputSecret id="password" value="#{formBean.password}"
+	    		required="true" requiredMessage="#{msg['form.password.req']}" />
+	    		
+	    		<h:outputLabel value="#{msg['form.passwordConfirm']}" for="passwordConfirm"/>
+	    		<h:inputSecret id="passwordConfirm" value="#{formBean.passwordConfirm}"
+	    		required="true" requiredMessage="#{msg['form.passwordConfirm.req']}" />
+	    		
+	    		<h:outputLabel value="#{msg['form.userRole']}" for="userRole"/>
+	    		<h:selectOneMenu id="userRole" value="#{formBean.userRole}"
+	    		required="true" requiredMessage="#{msg['form.userRole.req']}" >
+	    			<f:selectItem itemLabel="#{msg['form.userRole.default']}"/>
+	    			<f:selectItem itemLabel="#{msg['form.userRole.admin']}" itemValue="admin" />
+	    			<f:selectItem itemLabel="#{msg['form.userRole.user']}" itemValue="usr" />	    		
+	    		</h:selectOneMenu>
+	    		
+	    		<h:outputLabel value="#{msg['form.birthdate']}" for="birthDate"/>
+	    		<h:inputText id="birthDate" value="#{formBean.birthdate}"
+	    		required="true" requiredMessage="#{msg['form.birthdate.req']}" >
+	    			<f:convertDateTime pattern="dd-MM-yyyy"/>
+	    		</h:inputText>
+	    		
+	    		<h:commandButton type="submit" value="#{msg['form.submit']}" action="#{formBean.addUser}"/> 	
+	    	</h:panelGrid>
+	    </h:form>
 	</ui:define>
 </ui:composition>
 </html>
+
+
+
+
+
+

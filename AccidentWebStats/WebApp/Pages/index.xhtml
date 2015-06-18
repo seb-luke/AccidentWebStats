@@ -10,8 +10,11 @@
 <h:head>
 	<title>Accident Reporting</title>
 	<h:outputScript library="default" name="js/geoLocation.js"></h:outputScript>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/> 
+	<h:outputStylesheet library="default" name="css/index.css"></h:outputStylesheet>
 </h:head>
 <body>
+ <div class="content">
 	<h1>Test Body</h1>
 	
 	<h:form>			
@@ -20,7 +23,7 @@
 		<p:commandButton type="button" onclick="getLocationConstant()" value="Report accident" icon="ui-icon-info"/>
 	</h:form>
 	
-	
+</div>
 </body>
 </html>
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/Templates/default/_defaultTemplate.xhtml">
+
+	<ui:define name="content">
+	    <h:form>
+	    	<h:messages errorClass="errorMessage" infoClass="infoMessage" warnClass="warnMessage"/>
+	    	<h:panelGrid columns="2">
+	    		<h:outputText value="#{msg['form.name']}"/>
+	    		<h:outputText id="name" value="#{formBean.name}"/>
+	    		
+	    		<h:outputText value="#{msg['form.surname']}"/>
+	    		<h:outputText id="surname" value="#{formBean.surname}"/>
+	    		
+	    		<h:outputText value="#{msg['form.username']}"/>
+	    		<h:outputText id="username" value="#{formBean.username}"/>
+	    		
+	    		<h:outputText value="#{msg['form.email']}"/>
+	    		<h:outputText id="email" value="#{formBean.email}" />
+	    		
+	    		<h:outputText value="#{msg['form.password']}"/>
+	    		<h:outputText id="password" value="#{formBean.password}"
+	    		required="true" requiredMessage="#{msg['form.password.req']}" />
+	    		
+	    		<h:outputText value="#{msg['form.passwordConfirm']}"/>
+	    		<h:outputText id="passwordConfirm" value="#{formBean.passwordConfirm}" />
+	    		
+	    		<h:outputText value="#{msg['form.userRole']}"/>
+	    		<h:outputText id="userRole" value="#{formBean.userRole}"/>
+	    		
+	    		<h:outputText value="#{msg['form.birthdate']}"/>
+	    		<h:outputText id="birthDate" value="#{formBean.birthdate}">
+	    			<f:convertDateTime pattern="dd-MM-yyyy"/>
+	    		</h:outputText>
+	    			
+	    	</h:panelGrid>
+	    </h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

@@ -19,7 +19,7 @@
 		<display-name>Pages/admin/createNewUser.xhtml</display-name>
 		<from-view-id>/Pages/admin/createNewUser.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>succes</from-outcome>
+			<from-outcome>success</from-outcome>
 			<to-view-id>/Pages/admin/RegSuccess.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>

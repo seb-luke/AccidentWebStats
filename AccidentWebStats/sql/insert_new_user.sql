@@ -1,0 +1,2 @@
+INSERT INTO AWS_USERS(email,name,surname,username,passwd,salt,permissions,birthdate,secq_id)
+VALUES('mail@dom.ro','nume1','prenume1','usrname1','parolaparola','salt','usr',TO_DATE('23-02-1990','dd-MM-yyyy'),1);
