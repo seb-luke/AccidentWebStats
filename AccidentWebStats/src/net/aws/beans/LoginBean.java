@@ -4,6 +4,7 @@
 package net.aws.beans;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.servlet.http.HttpSession;
 
 import net.aws.conn.AwsConnection;
@@ -22,8 +24,12 @@ import net.aws.conn.AwsConnection;
  */
 @ManagedBean(name="loginBean")
 @SessionScoped
-public class LoginBean extends FormsAbstractBean{
+public class LoginBean extends FormsAbstractBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5621946789345784630L;
 	private String username;
 	private String password;
 	
@@ -55,6 +61,7 @@ public class LoginBean extends FormsAbstractBean{
 	public String logIn() {
 
 		boolean loginCorrect = false;
+		String originalURL;
 		AwsConnection awsConn = new AwsConnection();
 		ResourceBundle msg = ResourceBundle.getBundle("net.aws.lang.awsLang");
 		
@@ -101,9 +108,20 @@ public class LoginBean extends FormsAbstractBean{
 			return "failure";
 		}
 		
+		//set user as logged in for current session
 		HttpSession session = SessionBean.getSession();
 		session.setAttribute("username", username);
-		return "success";
+		
+		//Get the Original URL form the external context
+		ExternalContext extContex = SessionBean.getExtContext();
+		
+		if(extContex.getSessionMap().containsKey("originalURL")) {
+			originalURL = (String)extContex.getSessionMap().get("originalURL");
+		} else {
+			originalURL = "dashboard";
+		}
+		
+		return originalURL;
 	}
 	
 	public String logOut() {

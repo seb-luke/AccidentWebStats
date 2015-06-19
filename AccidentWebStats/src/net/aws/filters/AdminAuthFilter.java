@@ -51,10 +51,10 @@ public class AdminAuthFilter implements Filter {
 			HttpSession ses = req.getSession(false);
 			
 			//reqURI contains everything after TLD and until query- strings (i.e. ?x=2;y=3)
-			//OriginalURL contains the whole URL without query strings. It is used for reconstruction of original URL
+			//originalURL removes the context path from the reqURI adn then constructs the URL so users will be redirected correctly
 			//queryString returns the Strings that came as POST parameters and null if non exist.
 			String reqURI = req.getRequestURI();
-			String originalURL = req.getRequestURL().toString();
+			String originalURL = reqURI.replace(req.getContextPath(), "");
 			String queryString = req.getQueryString();
 			
 			//Reconstructing the original URL

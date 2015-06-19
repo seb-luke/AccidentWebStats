@@ -3,6 +3,7 @@
  */
 package net.aws.beans;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,6 +36,10 @@ public class SessionBean {
             return (String) session.getAttribute("userid");
         else
             return null;
+    }
+    
+    public static ExternalContext getExtContext() {
+    	return FacesContext.getCurrentInstance().getExternalContext();
     }
 
 }
