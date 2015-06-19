@@ -6,7 +6,6 @@ package net.aws.beans;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.Date;
 
 import javax.faces.application.FacesMessage;
@@ -134,7 +133,6 @@ public class UserRegistrationBean extends FormsAbstractBean implements Serializa
 	}
 	/**
 	 * @param birthdate the birthday to set
-	 * @throws ParseException 
 	 */
 	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;

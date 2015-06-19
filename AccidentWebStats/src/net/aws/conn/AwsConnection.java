@@ -14,7 +14,6 @@ import java.sql.Date;
 
 import javax.sql.PooledConnection;
 
-import net.aws.exception.MissingStatementException;
 import net.crackstation.security.AwsPasswordHash;
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 
@@ -140,7 +139,6 @@ public class AwsConnection {
 	 * @return				the result as a ResultSet. It needs to be then parsed
 	 * @throws IOException  in case the query property file is not found
 	 * @throws SQLException in case the builded query has errors
-	 * @throws MissingStatementException in case the statement execution fails
 	 */
 	public int insertCoordinates(String latitude, String longitude) throws IOException, SQLException {
 		String queryKey = "insert_coord";
