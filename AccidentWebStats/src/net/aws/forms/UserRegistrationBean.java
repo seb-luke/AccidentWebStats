@@ -25,7 +25,7 @@ import net.crackstation.security.AwsPasswordHash;
 
 @ManagedBean(name="formBean")
 @SessionScoped
-public class UserRegistrationBean implements Serializable {
+public class UserRegistrationBean extends FormsAbstractBean implements Serializable {
 
 	/**
 	 * 
@@ -141,9 +141,6 @@ public class UserRegistrationBean implements Serializable {
 		this.birthdate = birthdate;
 	}
 	
-	private void addMessage(FacesMessage message){
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
 	
 	/**
 	 * The method check first if the input inserted in the form is valid
@@ -209,7 +206,7 @@ public class UserRegistrationBean implements Serializable {
 		}
 		
 		if( queryResult == 0 ) {
-			addMessage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Couold not insert user into database", null));
+			addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Couold not insert user into database", null));
 			return false;
 		}
 		
@@ -233,17 +230,17 @@ public class UserRegistrationBean implements Serializable {
 		
 		if( !password.equals(passwordConfirm) ) {
 			formIsValid = false;
-			addMessage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Passwords do not match", null));
+			addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Passwords do not match", null));
 		}
 			
 		try {
 			if(awsConn.usernameExists(username)) {
 				formIsValid = false;
-				addMessage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username exists. Try a new one.", null));
+				addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username exists. Try a new one.", null));
 			}
 			if( awsConn.emailExists(email) ) {
 				formIsValid = false;
-				addMessage(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email exists. Try a new one or try password recovery", null));
+				addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email exists. Try a new one or try password recovery", null));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
