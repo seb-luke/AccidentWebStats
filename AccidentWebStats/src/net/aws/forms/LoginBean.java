@@ -58,6 +58,20 @@ public class LoginBean extends FormsAbstractBean{
 		ResourceBundle msg = ResourceBundle.getBundle("net.aws.lang.awsLang");
 		
 		try {
+			if(!awsConn.usernameExists(username)) {
+				addMessage("username", new FacesMessage(FacesMessage.SEVERITY_WARN, 
+						msg.getString("login.username.wrong"), null));
+				return "failure";
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
 			loginCorrect = awsConn.checkPassword(username, password);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
@@ -79,7 +93,8 @@ public class LoginBean extends FormsAbstractBean{
 		awsConn.closeConn();
 		
 		if(!loginCorrect) {
-			addMessage("password", new FacesMessage(FacesMessage.SEVERITY_WARN, msg.getString("login.password.wrong"), null));
+			addMessage("password", new FacesMessage(FacesMessage.SEVERITY_WARN, 
+					msg.getString("login.password.wrong"), null));
 			return "failure";
 		}
 		
