@@ -4,9 +4,10 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-  <title><ui:insert name="defaultTitle">
-  	<h:outputText value="#{msg['header.title']}"/>
-  </ui:insert></title>
+  <title> <h:outputText value="#{msg['header.title']}"/>
+  	<ui:insert name="title">Page Title Here</ui:insert>
+  </title>
+  
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <h:outputStylesheet library="default" name="css/default.css"></h:outputStylesheet>
 </h:head>

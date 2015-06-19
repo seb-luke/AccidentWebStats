@@ -6,7 +6,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
+
 <ui:composition template="/Templates/default/_defaultTemplate.xhtml">
+	<ui:define name="title"><h:outputText value="#{msg['header.dashboard']}"/> </ui:define>
 	<ui:define name="content">
 	    <h1>This is the dashboard</h1>
 	</ui:define>
