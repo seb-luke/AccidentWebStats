@@ -4,6 +4,8 @@
 package net.aws.conn;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +15,7 @@ import java.sql.Date;
 import javax.sql.PooledConnection;
 
 import net.aws.exception.MissingStatementException;
+import net.crackstation.security.AwsPasswordHash;
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 
 /**
@@ -247,6 +250,28 @@ public class AwsConnection {
 		
 		return preStatement.executeUpdate();
 	}
+	
+	public boolean checkPassword(String username, String password) 
+			throws IOException, SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+		String salt;
+		String hashedPassword;
+		String query_key = "get_pwd_salt";
+		
+		String query = Queries.getQuery(query_key);
+		setPreparedStatement(query);
+		
+		preStatement.setString(1, password);
+		result = preStatement.executeQuery();
+		
+		if(!result.next()) {
+			throw new SQLException("ResultSet came back empty");
+		}
+		
+		salt = result.getString("salt");
+		hashedPassword = result.getString("passwd");
+		
+		return AwsPasswordHash.validatePassword(password, salt, hashedPassword);
+	}
 
 
 	/**
@@ -264,6 +289,9 @@ public class AwsConnection {
 			e.printStackTrace();
 		}		
 	}
+
+
+
 }
 
 

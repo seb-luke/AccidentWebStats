@@ -10,11 +10,25 @@
 
 	<ui:define name="content">
 	   
-	   <h:form>
-	   	
-	   
-	   
+	   <h:form id="loginForm">
+	   <h:outputText value="#{msg['login.infoText']}"></h:outputText>
+	   <h:panelGrid columns="2">
+	   		<h:outputLabel value="#{msg['login.username']}" for="username"/>
+	   		<h:inputText id="username" value="#{loginBean.username}"
+	   		required="true" requiredMessage="#{msg['login.username.req']}" />
+	   		<h:message for="username" errorClass="errorMessage"/>
+	   		
+	   		<h:outputLabel value="#{msg['login.password']}" for="password"/>
+	   		<h:inputSecret id="password" value="#{loginBean.password}"
+	   		required="true" requiredMessage="#{msg['login.password.req']}"/>
+	   		<h:message for="password" errorClass="errorMessage"/> 
+	   		
+	   		<h:commandButton type="submit" value="#{msg['login.submit']}" action="#{loginBean.logIn}"/>	   
+	   </h:panelGrid>
 	   </h:form>
+	   
+	   <h:message fatalClass="fatalMessage" infoClass="infoMessage" 
+	   	warnClass="warnMessage" globalOnly="true"/>
 	   
 	</ui:define>
 

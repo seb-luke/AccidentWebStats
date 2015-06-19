@@ -31,5 +31,21 @@
 			<to-view-id>/Pages/admin/createNewUser.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>Pages/login.xhtml</display-name>
+		<from-view-id>/Pages/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/Pages/admin/dashboard.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Pages/login.xhtml</display-name>
+		<from-view-id>/Pages/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/Pages/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>
