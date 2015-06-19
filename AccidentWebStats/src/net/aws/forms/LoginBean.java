@@ -88,9 +88,11 @@ public class LoginBean extends FormsAbstractBean{
 			addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password "
 					+ "hash select query could not be run", null));
 			return "failure";
+		} finally {
+			awsConn.closeConn();
 		}
 		
-		awsConn.closeConn();
+		
 		
 		if(!loginCorrect) {
 			addMessage("loginForm:password", new FacesMessage(FacesMessage.SEVERITY_WARN, 

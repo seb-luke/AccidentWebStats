@@ -202,14 +202,14 @@ public class UserRegistrationBean extends FormsAbstractBean implements Serializa
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			awsConn.closeConn();
 		}
 		
 		if( queryResult == 0 ) {
 			addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Couold not insert user into database", null));
 			return false;
 		}
-		
-		awsConn.closeConn();
 		
 		return true;
 	}
@@ -249,8 +249,10 @@ public class UserRegistrationBean extends FormsAbstractBean implements Serializa
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			awsConn.closeConn();
 		}
-		awsConn.closeConn();
+		
 		return formIsValid;
 	}
 	
