@@ -11,7 +11,8 @@ import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.servlet.http.HttpSession;
 
 import net.aws.conn.AwsConnection;
 
@@ -20,7 +21,7 @@ import net.aws.conn.AwsConnection;
  *
  */
 @ManagedBean(name="loginBean")
-@RequestScoped
+@SessionScoped
 public class LoginBean extends FormsAbstractBean{
 
 	private String username;
@@ -100,8 +101,15 @@ public class LoginBean extends FormsAbstractBean{
 			return "failure";
 		}
 		
-		//TODO set session cookie
+		HttpSession session = SessionBean.getSession();
+		session.setAttribute("username", username);
 		return "success";
+	}
+	
+	public String logOut() {
+		HttpSession session = SessionBean.getSession();
+		session.invalidate();
+		return "login";
 	}
 	
 	
