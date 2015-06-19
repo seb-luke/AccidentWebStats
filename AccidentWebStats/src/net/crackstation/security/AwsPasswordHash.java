@@ -43,7 +43,7 @@ public class AwsPasswordHash {
     
     public static boolean validatePassword(String password, String salt, String correctHash) 
     		throws NoSuchAlgorithmException, InvalidKeySpecException {
-    	return PasswordHash.validatePassword(password, PasswordHash.PBKDF2_ALGORITHM + ";" + salt + ";" + correctHash);
+    	return PasswordHash.validatePassword(password, PasswordHash.PBKDF2_ITERATIONS + ":" + salt + ":" + correctHash);
     }
 }
 

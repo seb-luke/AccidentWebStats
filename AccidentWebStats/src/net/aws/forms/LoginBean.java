@@ -59,7 +59,7 @@ public class LoginBean extends FormsAbstractBean{
 		
 		try {
 			if(!awsConn.usernameExists(username)) {
-				addMessage("username", new FacesMessage(FacesMessage.SEVERITY_WARN, 
+				addMessage("loginForm:username", new FacesMessage(FacesMessage.SEVERITY_WARN, 
 						msg.getString("login.username.wrong"), null));
 				return "failure";
 			}
@@ -84,7 +84,7 @@ public class LoginBean extends FormsAbstractBean{
 			e.printStackTrace();
 		} catch (SQLException e) {
 			System.err.println("SQL Exception in LoginBean.logIn(). Check "
-					+ "password query did not run correctly.");
+					+ "password query did not run correctly. " + e.getMessage());
 			addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password "
 					+ "hash select query could not be run", null));
 			return "failure";
@@ -93,11 +93,12 @@ public class LoginBean extends FormsAbstractBean{
 		awsConn.closeConn();
 		
 		if(!loginCorrect) {
-			addMessage("password", new FacesMessage(FacesMessage.SEVERITY_WARN, 
+			addMessage("loginForm:password", new FacesMessage(FacesMessage.SEVERITY_WARN, 
 					msg.getString("login.password.wrong"), null));
 			return "failure";
 		}
 		
+		//TODO set session cookie
 		return "success";
 	}
 	

@@ -37,6 +37,7 @@
 		<navigation-case>
 			<from-outcome>success</from-outcome>
 			<to-view-id>/Pages/admin/dashboard.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

@@ -260,7 +260,7 @@ public class AwsConnection {
 		String query = Queries.getQuery(query_key);
 		setPreparedStatement(query);
 		
-		preStatement.setString(1, password);
+		preStatement.setString(1, username);
 		result = preStatement.executeQuery();
 		
 		if(!result.next()) {
@@ -270,7 +270,9 @@ public class AwsConnection {
 		salt = result.getString("salt");
 		hashedPassword = result.getString("passwd");
 		
-		return AwsPasswordHash.validatePassword(password, salt, hashedPassword);
+		boolean b = AwsPasswordHash.validatePassword(password, salt, hashedPassword);
+		
+		return b;
 	}
 
 
