@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.aws.forms;
+package net.aws.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
