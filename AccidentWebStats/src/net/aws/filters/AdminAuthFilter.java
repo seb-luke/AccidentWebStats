@@ -50,12 +50,25 @@ public class AdminAuthFilter implements Filter {
 			HttpServletResponse resp = (HttpServletResponse) response;
 			HttpSession ses = req.getSession(false);
 			
+			//reqURI contains everything after TLD and until query- strings (i.e. ?x=2;y=3)
+			//OriginalURL contains the whole URL without query strings. It is used for reconstruction of original URL
+			//queryString returns the Strings that came as POST parameters and null if non exist.
 			String reqURI = req.getRequestURI();
+			String originalURL = req.getRequestURL().toString();
+			String queryString = req.getQueryString();
+			
+			//Reconstructing the original URL
+			if( queryString != null ) {
+				originalURL += "?" + queryString;
+			}
+			
 			if( reqURI.indexOf("/Pages/login.xhtml") >= 0
 					|| (ses != null && ses.getAttribute("username") != null)
 					|| reqURI.contains("javax.faces.resource")) {
 				chain.doFilter(request, response);
 			} else {
+				req.getSession().setAttribute("originalURL", originalURL);
+				
 				resp.sendRedirect(req.getContextPath() + "/Pages/login.xhtml");
 			} 
 		} catch (Exception e) {
