@@ -12,7 +12,6 @@ import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import net.aws.conn.AwsConnection;
 import net.crackstation.security.AwsPasswordHash;
@@ -209,6 +208,8 @@ public class UserRegistrationBean extends FormsAbstractBean implements Serializa
 			addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Couold not insert user into database", null));
 			return false;
 		}
+		
+		awsConn.closeConn();
 		
 		return true;
 	}
