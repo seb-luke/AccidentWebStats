@@ -9,8 +9,8 @@
 		<div style="width:100%;font-size:36px;line-height:48px;background-color:navy;color:white">
 			Default Header
 			
-			<h:form id="logoutForm" >
-				<h:commandButton type="submit" value="#{request.remoteUser}" action="#{loginBean.logOut}" />
+			<h:form id="logoutForm" rendered="#{not empty loginBean.remoteUser}" >
+				<h:commandButton type="submit" value="#{msg['logout.submit']}" action="#{loginBean.logOut}" />
 			</h:form>
 		</div>
 	</ui:composition>
