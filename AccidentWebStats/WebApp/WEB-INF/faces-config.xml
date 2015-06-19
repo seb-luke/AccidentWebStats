@@ -54,6 +54,7 @@
 		<navigation-case>
 			<from-outcome>login</from-outcome>
 			<to-view-id>/Pages/login.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 
