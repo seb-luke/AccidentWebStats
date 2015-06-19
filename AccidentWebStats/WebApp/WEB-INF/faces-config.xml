@@ -16,7 +16,7 @@
 		</resource-bundle>
 	</application>
 	<navigation-rule>
-		<display-name>Pages/admin/createNewUser.xhtml</display-name>
+		<display-name>Create User</display-name>
 		<from-view-id>/Pages/admin/createNewUser.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>success</from-outcome>
@@ -24,7 +24,7 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>Pages/admin/createNewUser.xhtml</display-name>
+		<display-name>Create User</display-name>
 		<from-view-id>/Pages/admin/createNewUser.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>failure</from-outcome>
@@ -32,19 +32,27 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>Pages/login.xhtml</display-name>
+		<display-name>Login</display-name>
 		<from-view-id>/Pages/login.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>success</from-outcome>
+			<from-outcome>dashboard</from-outcome>
 			<to-view-id>/Pages/admin/dashboard.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>Pages/login.xhtml</display-name>
+		<display-name>Login</display-name>
 		<from-view-id>/Pages/login.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>failure</from-outcome>
+			<to-view-id>/Pages/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>From all to login</display-name>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
 			<to-view-id>/Pages/login.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
