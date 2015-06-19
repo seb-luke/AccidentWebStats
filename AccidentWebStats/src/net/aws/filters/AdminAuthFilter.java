@@ -61,6 +61,8 @@ public class AdminAuthFilter implements Filter {
 			if( queryString != null ) {
 				originalURL += "?" + queryString;
 			}
+			//redirect
+			originalURL += "?faces-redirect=true";
 			
 			if( reqURI.indexOf("/Pages/login.xhtml") >= 0
 					|| (ses != null && ses.getAttribute("username") != null)

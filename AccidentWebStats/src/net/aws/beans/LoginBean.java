@@ -130,6 +130,9 @@ public class LoginBean extends FormsAbstractBean implements Serializable{
 		return "login";
 	}
 	
+	public String getRemoteUser() {
+		return (String) SessionBean.getSession().getAttribute("username");
+	}
 	
 
 }
