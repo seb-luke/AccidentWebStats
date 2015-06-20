@@ -29,17 +29,24 @@
 				</b:dropMenu>
 			</b:navbarLinks>
 			
+
 			<b:navbarLinks pull="right">
-				<b:dropMenu value="#{msg['navbar.language.label']}">
-					<b:navLink value="English" />
-					<b:navLink value="Română"/>
-				</b:dropMenu>
 				<b:navLink rendered="#{empty loginBean.remoteUser}" value="#{msg['navbar.login']}" outcome="login"/>
 				<b:dropMenu rendered="#{not empty loginBean.remoteUser}" value="#{loginBean.remoteUser}" >
 					<b:navLink value="#{msg['navbar.changeSettings']}" href="#"/>
 					<b:navLink value="#{msg['navbar.logout']}" outcome="logout" />
 				</b:dropMenu>
 			</b:navbarLinks>
+			
+			<b:navbarLinks pull="right">
+				<h:form>
+					<h:selectOneMenu value="#{langBean.locale}" onchange="submit()" 
+							valueChangeListener="#{langBean.localeChanged}" styleClass="langSelector">
+						<f:selectItems value="#{langBean.countries}" />
+					</h:selectOneMenu>
+				</h:form>
+			</b:navbarLinks>
+			
 		</b:navBar>
 		
 	</ui:composition>

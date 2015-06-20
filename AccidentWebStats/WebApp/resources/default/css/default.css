@@ -11,13 +11,27 @@
 	margin-top: -10%;
 }
 
+.langSelector {
+	margin-top: 4px;
+	margin-right: 40px;
+	border: 1px solid #eee;
+	border-radius:2px;
+      padding: 5px 30px 5px 5px;
+      font-size: 14px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      outline: none;
+}
+
 .announceAccident{
 	border-radius: 50px;
     -moz-border-radius: 50px;
     -webkit-border-radius: 50px;
-    width: 70%;
     height: 100%;
     font-size: 30px;
+    min-width: 300px;
+	width: 70%;
 }
 
 .body{
