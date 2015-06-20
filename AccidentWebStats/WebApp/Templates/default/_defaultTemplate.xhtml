@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{langBean.locale}"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:view locale="#{langBean.loc}">
 <h:head>
   <title> <h:outputText value="#{msg['header.title']}"/>
   	<ui:insert name="title">Page Title Here</ui:insert>
@@ -34,5 +37,5 @@
 	</div>
 
 </h:body>
-
+</f:view>
 </html>

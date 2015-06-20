@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -17,6 +18,7 @@ public class LanguageBean implements Serializable {
 
     private static final long serialVersionUID = 2756934361134603857L;
     private String locale;
+    private Locale loc;
     
     private static Map<String,Object> countries;
     
@@ -30,8 +32,17 @@ public class LanguageBean implements Serializable {
     	return countries;
     }
     
+    @PostConstruct
+    public void init() {
+        loc = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
+    }
+    
     public String getLocale() {
     	return locale;
+    }
+    
+    public Locale getLoc() {
+    	return loc;
     }
     
     public void setLocale(String locale) {
@@ -45,6 +56,7 @@ public class LanguageBean implements Serializable {
     		if( entry.getValue().toString().equals(newLocaleValue) ) {
     			FacesContext.getCurrentInstance().getViewRoot()
     				.setLocale((Locale) entry.getValue());
+    			loc = (Locale) entry.getValue();
     		}
     	}
     }
