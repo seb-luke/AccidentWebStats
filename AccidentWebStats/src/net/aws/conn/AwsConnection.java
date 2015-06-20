@@ -14,6 +14,9 @@ import java.sql.Date;
 
 import javax.sql.PooledConnection;
 
+import javax.servlet.jsp.jstl.sql.Result;  
+import javax.servlet.jsp.jstl.sql.ResultSupport;
+
 import net.crackstation.security.AwsPasswordHash;
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 
@@ -292,6 +295,17 @@ public class AwsConnection {
 		return usrRole;
 	}
 
+	public Result getTopHits(int noOfHits) throws SQLException, IOException {
+		String queryKey = "top_hits";
+		String query = Queries.getQuery(queryKey);
+		
+		setPreparedStatement(query);
+		preStatement.setInt(1, noOfHits);
+		result = preStatement.executeQuery();
+		
+		return ResultSupport.toResult(result);
+	}
+
 
 	/**
 	 * Closes opened connections: PooledConnection, Connection and ResultSet (if not null)
@@ -308,12 +322,6 @@ public class AwsConnection {
 			e.printStackTrace();
 		}		
 	}
-
-
-
-
-
-
 }
 
 
