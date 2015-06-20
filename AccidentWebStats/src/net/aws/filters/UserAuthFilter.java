@@ -20,13 +20,13 @@ import javax.servlet.http.HttpSession;
  * @author Sebastian Luca
  *
  */
-@WebFilter(filterName = "AdminAuthFilter", urlPatterns = { "/Pages/admin/*" })
-public class AdminAuthFilter implements Filter {
+@WebFilter(filterName = "UserAuthFilter", urlPatterns = { "/Pages/user/*" })
+public class UserAuthFilter implements Filter {
 
 	/**
 	 * 
 	 */
-	public AdminAuthFilter() {
+	public UserAuthFilter() {
 		// Nothing to do here
 	}
 

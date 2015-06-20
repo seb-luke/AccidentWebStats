@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14341782450660" configfile="/AccidentWebStats/WebApp/WEB-INF/faces-config.xml">
   <nodes xsi:type="pageflow:PFPage" name="Create User" x="122" y="178" id="pf14345705174270" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" outlinks="pf14345705174271 pf14345705174272" inlinks="pf14345705174272" path="/Pages/admin/createNewUser.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="Pages/admin/RegSuccess.xhtml" x="338" y="178" id="pf14345705174273" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14345705174271" path="/Pages/admin/RegSuccess.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Pages/admin/RegSuccess.xhtml" x="338" y="178" id="pf14345705174273" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14345705174271" path="/Pages/user/RegSuccess.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="Login" x="338" y="562" id="pf14346792423680" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" outlinks="pf14346792423681 pf14346792423682" inlinks="pf14346792423682 pf14347449898330" path="/Pages/login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="Pages/admin/dashboard.xhtml" x="554" y="562" id="pf14346792423683" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14346792423681" path="/Pages/admin/dashboard.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Pages/admin/dashboard.xhtml" x="554" y="562" id="pf14346792423683" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14346792423681" path="/Pages/user/dashboard.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="From all to login" x="122" y="562" id="pf14347449898331" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf14347449898330 pf14347664141200" path="*"/>
-  <nodes xsi:type="pageflow:PFPage" name="Pages/logout.xhtml" id="pf14347664141201" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" inlinks="pf14347664141200" path="/Pages/logout.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Pages/logout.xhtml" x="264" y="384" id="pf14347664141201" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" inlinks="pf14347664141200" path="/Pages/logout.xhtml"/>
   <links id="pf14345705174271" target="pf14345705174273" source="pf14345705174270" outcome="success"/>
   <links id="pf14346792423681" target="pf14346792423683" source="pf14346792423680" outcome="dashboard" redirect="true"/>
   <links id="pf14347449898330" target="pf14346792423680" source="pf14347449898331" outcome="login" redirect="true"/>

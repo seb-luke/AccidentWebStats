@@ -18,7 +18,7 @@
 		
 		<b:navBar brand="#{msg['navbar.brand']}" brandHref="#{request.contextPath}" static="true" inverse="true">
 			<b:navbarLinks>
-				<b:navLink rendered="#{not empty loginBean.remoteUser}" value="#{msg['navbar.dashboard']}" href="/Pages/admin/dashboard.xhtml"/>
+				<b:navLink rendered="#{not empty loginBean.remoteUser}" value="#{msg['navbar.dashboard']}" href="/Pages/user/dashboard.xhtml"/>
 				<b:navLink rendered="#{not empty loginBean.remoteUser}" value="#{msg['navbar.addInfo']}" href="#"/>
 				<b:dropMenu rendered="#{not empty loginBean.remoteUser &amp;&amp; loginBean.userRole == 'adm'}"  
 						value="#{msg['navbar.dropdown.label']}">

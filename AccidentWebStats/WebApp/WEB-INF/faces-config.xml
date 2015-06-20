@@ -20,7 +20,7 @@
 		<from-view-id>/Pages/admin/createNewUser.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/Pages/admin/RegSuccess.xhtml</to-view-id>
+			<to-view-id>/Pages/user/RegSuccess.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -36,7 +36,7 @@
 		<from-view-id>/Pages/login.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>dashboard</from-outcome>
-			<to-view-id>/Pages/admin/dashboard.xhtml</to-view-id>
+			<to-view-id>/Pages/user/dashboard.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
