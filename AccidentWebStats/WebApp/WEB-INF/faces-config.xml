@@ -49,7 +49,7 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>From all to login</display-name>
+		<display-name>All Pages</display-name>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>login</from-outcome>
@@ -58,11 +58,20 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>From all to logout</display-name>
+		<display-name>All Pages</display-name>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>logout</from-outcome>
 			<to-view-id>/Pages/logout.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+		<navigation-rule>
+		<display-name>All Pages</display-name>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>createUser</from-outcome>
+			<to-view-id>/Pages/admin/createNewUser.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>
