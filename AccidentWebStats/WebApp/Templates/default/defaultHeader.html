@@ -1,18 +1,42 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <body>
 	<ui:composition>
-		<div style="width:100%;font-size:36px;line-height:48px;background-color:navy;color:white">
+	<ui:remove><!--
+ 		<div style="width:100%;font-size:36px;line-height:48px;background-color:navy;color:white">
 			Default Header
 			
 			<h:form id="logoutForm" rendered="#{not empty loginBean.remoteUser}" >
 				<h:commandButton type="submit" value="#{msg['logout.submit']}" action="#{loginBean.logOut}" />
 			</h:form>
-		</div>
+		</div> --></ui:remove>
+		
+		<b:navBar brand="#{msg['navbar.brand']}" brandHref="#{request.contextPath}" static="true" inverse="true">
+			<b:navbarLinks>
+				<b:navLink value="#{msg['navbar.dashboard']}" href="/Pages/admin/dashboard.xhtml"/>
+				<b:navLink value="#{msg['navbar.addInfo']}" href="#"/>
+				<b:dropMenu value="#{msg['navbar.dropdown.label']}">
+					<b:navLink value="#{msg['navbar.dropdown.createUser']}" href="#"/>
+					<b:navLink value="#{msg['navbar.dropdown.listUsers']}" href="#"/>
+					<b:navLink value="#{msg['navbar.dropdown.addSecQ']}" href="#"/>
+					<b:navLink value="#{msg['navbar.dropdown.listSecQ']}" href="#"/>
+				</b:dropMenu>
+			</b:navbarLinks>
+			
+			<b:navbarLinks pull="right">
+				<b:navLink value="#{msg['navbar.login']}" href="#"/>
+				<b:dropMenu value="Username" href="#" >
+					<b:navLink value="#{msg['navbar.changeSettings']}" href="#"/>
+					<b:navLink value="#{msg['navbar.logout']}" href="#"/>
+				</b:dropMenu>
+			</b:navbarLinks>
+		</b:navBar>
+		
 	</ui:composition>
 </body>
 </html>
