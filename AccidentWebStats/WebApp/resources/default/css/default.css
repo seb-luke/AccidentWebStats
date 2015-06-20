@@ -4,6 +4,13 @@
 	font-family: sans-serif;
 }
 
+.pageContainer{
+	padding: 30px 15px;
+	margin-bottom: 30px;
+	color: inherit;
+ 	background-color: #eee;
+}
+
 .errorMessage{
 	color:red;
 }

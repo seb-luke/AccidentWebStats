@@ -4,33 +4,79 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/Templates/default/_defaultTemplate.xhtml">
-
 	<ui:define name="content">
-	   
-	   <h:form id="loginForm">
-	   <h:outputText value="#{msg['login.infoText']}"></h:outputText>
-	   <h:panelGrid columns="3">
-	   		<h:outputLabel value="#{msg['login.username']}" for="username"/>
-	   		<h:inputText id="username" value="#{loginBean.username}"
-	   		required="true" requiredMessage="#{msg['login.username.req']}" />
-	   		<h:message for="username" errorClass="errorMessage" infoClass="infoMessage" warnClass="warnMessage"/>
-	   		
-	   		<h:outputLabel value="#{msg['login.password']}" for="password"/>
-	   		<h:inputSecret id="password" value="#{loginBean.password}"
-	   		required="true" requiredMessage="#{msg['login.password.req']}"/>
-	   		<h:message for="password" errorClass="errorMessage" infoClass="infoMessage" warnClass="warnMessage"/> 
-	   		
-	   		<h:commandButton type="submit" value="#{msg['login.submit']}" action="#{loginBean.logIn}"/>	   
-	   </h:panelGrid>
-	   </h:form>
-	   
-	   <h:message for="loginForm" fatalClass="fatalMessage" infoClass="infoMessage" 
-	   	warnClass="warnMessage" globalOnly="true"/>
+		<h:form id="loginForm">
+			<b:container styleClass="pageContainer">   				
+   				
+   				<ui:remove>
+	   			<!-- <h:outputText value="#{msg['login.infoText']}"></h:outputText>
+	   			<h:panelGrid columns="3">
+		   			<h:outputLabel value="#{msg['login.username']}" for="username"/>
+		   			<h:inputText id="username" value="#{loginBean.username}"
+		   				required="true" requiredMessage="#{msg['login.username.req']}" />
+		   			<h:message for="username" errorClass="errorMessage" infoClass="infoMessage" warnClass="warnMessage"/>
+		   		
+		   			<h:outputLabel value="#{msg['login.password']}" for="password"/>
+		   			<h:inputSecret id="password" value="#{loginBean.password}"
+		   				required="true" requiredMessage="#{msg['login.password.req']}"/>
+		   			<h:message for="password" errorClass="errorMessage" infoClass="infoMessage" warnClass="warnMessage"/> 
+		   		
+		   			<h:commandButton type="submit" value="#{msg['login.submit']}" action="#{loginBean.logIn}"/>	   
+				</h:panelGrid> --></ui:remove>
+				
+				<b:row>
+					<b:column col-xs="12" col-md="8"><h2><h:outputText value="#{msg['login.infoText']}"/></h2></b:column>
+				</b:row>
+				<b:row>
+					<b:column col-xs="12" col-md="2"><h:outputLabel value="#{msg['login.username']}" for="username"/></b:column>
+					<b:column col-xs="12" col-md="3">
+						<b:inputText id="username" value="#{loginBean.username}" placeholder="#{msg['login.username.label']}"
+							required="true" requiredMessage="#{msg['login.username.req']}">
+							<f:facet name="prepend"><b:iconAwesome name="user"/> </f:facet>	
+						</b:inputText>
+					</b:column>
+					<b:column col-xs="12" col-md="7">
+						<h:message for="username" errorClass="errorMessage" infoClass="infoMessage" warnClass="warnMessage"/>
+					</b:column>
+				</b:row>
+				
+				<b:row>
+					<b:column col-xs="12" col-md="2"><h:outputLabel value="#{msg['login.password']}" for="password"/></b:column>
+					<b:column col-xs="12" col-md="3">
+						<b:inputSecret id="password" value="#{loginBean.password}" placeholder="#{msg['login.password.label']}"
+							required="true" requiredMessage="#{msg['login.password.req']}">
+							<f:facet name="prepend"> <b:iconAwesome name="key"/> </f:facet>	
+						</b:inputSecret>
+					</b:column>
+					<b:column col-xs="12" col-md="7"> 
+						<h:message for="password" errorClass="errorMessage" infoClass="infoMessage" warnClass="warnMessage"/> 
+					</b:column>
+				</b:row>
+			</b:container>
+			<b:container>
+				<b:row>
+					<b:column span="4" offset="2">
+						<b:commandButton type="submit" value="#{msg['login.submit']}" action="#{loginBean.logIn}"/>
+					</b:column>
+				</b:row>				
+			</b:container>
+		</h:form>
+
+   
+			<h:message for="loginForm" fatalClass="fatalMessage" infoClass="infoMessage" 
+	   				warnClass="warnMessage" globalOnly="true"/>
 	   
 	</ui:define>
 
 </ui:composition>
 </html>
+
+
+
+
+
+
