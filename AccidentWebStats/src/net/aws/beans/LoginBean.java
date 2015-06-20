@@ -43,7 +43,7 @@ public class LoginBean extends FormsAbstractBean implements Serializable{
 	 * @param username the username to set
 	 */
 	public void setUsername(String username) {
-		this.username = username;
+		this.username = username.toLowerCase();
 	}
 	/**
 	 * @return the password

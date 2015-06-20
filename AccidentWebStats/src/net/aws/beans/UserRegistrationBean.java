@@ -75,7 +75,7 @@ public class UserRegistrationBean extends FormsAbstractBean implements Serializa
 	 * @param email the email to set
 	 */
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email.toLowerCase();
 	}
 	/**
 	 * @return the username
@@ -87,7 +87,7 @@ public class UserRegistrationBean extends FormsAbstractBean implements Serializa
 	 * @param username the username to set
 	 */
 	public void setUsername(String username) {
-		this.username = username;
+		this.username = username.toLowerCase();
 	}
 	/**
 	 * @return the password
@@ -123,7 +123,7 @@ public class UserRegistrationBean extends FormsAbstractBean implements Serializa
 	 * @param userRole the userRole to set
 	 */
 	public void setUserRole(String userRole) {
-		this.userRole = userRole;
+		this.userRole = userRole.toLowerCase();
 	}
 	/**
 	 * @return the birthday
