@@ -305,6 +305,19 @@ public class AwsConnection {
 		
 		return ResultSupport.toResult(result);
 	}
+	
+	public Result getNearby(double latitude, double longitude, int distance) throws SQLException, IOException {
+		String queryKey = "closest_coord";
+		String query = Queries.getQuery(queryKey);
+		
+		setPreparedStatement(query);
+		preStatement.setDouble(1, latitude);
+		preStatement.setDouble(2, longitude);
+		preStatement.setInt(3, distance);
+		result = preStatement.executeQuery();
+		
+		return ResultSupport.toResult(result);
+	}
 
 
 	/**

@@ -3,6 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
@@ -36,11 +37,85 @@
 				</h:column>
 				
 				<h:column>
-					<f:facet name="header"><h:outputText value="#{msg['dashboard.table.distance']}"/></f:facet>
+					<f:facet name="header"><h:outputText value="#{msg['dashboard.table.hits']}"/></f:facet>
 					#{var.hits}
 				</h:column>				
 			</h:dataTable>
-		</div>	   
+		</div>
+		
+		<div class="coordSearch">
+			<h:form id="searchCoord">
+			<b:container styleClass="pageContainer">
+				<b:row>
+					<b:column col-xs="12" col-md="8"><h2><h:outputText value="#{msg['dashboard.search.infoText']}"/></h2></b:column>
+				</b:row>					
+				<b:row>					
+					<b:column col-sm="6" col-lg="4">
+						<b:inputText id="latitude" value="#{dashBean.latitude}" placeholder="#{msg['dashboard.search.lat.placeholder']}"
+							required="true" requiredMessage="#{msg['dashboard.search.lat.req']}" 
+							autocomplete="off" label="#{msg['dashboard.search.lat']}">
+							<f:facet name="prepend"><b:iconAwesome name="globe"/> </f:facet>	 
+						</b:inputText>
+					</b:column> 
+					<b:column col-sm="6" col-lg="4">
+						<b:inputText id="longitude" value="#{dashBean.longitude}" placeholder="#{msg['dashboard.search.long.placeholder']}"
+							required="true" requiredMessage="#{msg['dashboard.search.long.req']}" 
+							autocomplete="off" label="#{msg['dashboard.search.long']}">
+							<f:facet name="prepend"><b:iconAwesome name="globe"/> </f:facet>	 
+						</b:inputText>
+					</b:column>
+					<b:column col-sm="6" col-lg="2">
+						<b:inputText id="results" value="#{dashBean.results}" 
+							required="true" requiredMessage="#{msg['dashboard.search.results.req']}" 
+							autocomplete="off" label="#{msg['dashboard.search.results']}">
+							<f:facet name="prepend"><b:iconAwesome name="road"/> </f:facet>	 
+						</b:inputText>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column col-xs="6" col-md="4">
+						<b:commandButton type="submit" value="#{msg['dashboard.search.submit']}" action="#{dashBean.search}"/>
+					</b:column>
+				</b:row>
+			</b:container>
+		</h:form>
+		</div>	
+		<div class="table-responsive" >
+			<h:dataTable styleClass="table table-striped" var="var" value="#{dashBean.searchResults}"
+					rendered="#{dashBean.searchResults != null}" >
+				<h:column>
+					<f:facet name="header"><h:outputText value="#{msg['dashboard.table.id']}"/></f:facet>
+					#{var.loc_id}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header"><h:outputText value="#{msg['dashboard.table.lat']}"/></f:facet>
+					#{var.latitude}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header"><h:outputText value="#{msg['dashboard.table.long']}"/></f:facet>
+					#{var.longitude}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header"><h:outputText value="#{msg['dashboard.table.tStamp']}"/></f:facet>
+					<h:outputText value="#{var.thedate}">
+						<f:convertDateTime/>
+					</h:outputText>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header"><h:outputText value="#{msg['dashboard.table.hits']}"/></f:facet>
+					#{var.hits}
+				</h:column>		
+				
+				<h:column>
+					<f:facet name="header"><h:outputText value="#{msg['dashboard.table.distance']}"/></f:facet>
+					#{var.distance}
+				</h:column>	
+			</h:dataTable>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>
