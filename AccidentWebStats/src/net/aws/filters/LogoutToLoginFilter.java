@@ -53,9 +53,9 @@ public class LogoutToLoginFilter implements Filter {
 			} else {
 				//user needs to be logged out first
 				ses.invalidate();
-				//after that, redirect to login
-				resp.sendRedirect(req.getContextPath() + "/Pages/login.xhtml?faces-redirect=true");
 			}
+			//after that, redirect to login
+			resp.sendRedirect(req.getContextPath() + "/Pages/login.xhtml?faces-redirect=true");
 		} catch (Exception e) {
 			System.err.println("\n\tLogin to Logout Filter Err: " + e.getMessage());
 		}
