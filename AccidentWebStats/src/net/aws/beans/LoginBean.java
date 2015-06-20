@@ -62,6 +62,7 @@ public class LoginBean extends FormsAbstractBean implements Serializable{
 
 		boolean loginCorrect = false;
 		String originalURL;
+		String usrRole = "usr";
 		AwsConnection awsConn = new AwsConnection();
 		ResourceBundle msg = ResourceBundle.getBundle("net.aws.lang.awsLang");
 		
@@ -81,6 +82,8 @@ public class LoginBean extends FormsAbstractBean implements Serializable{
 		
 		try {
 			loginCorrect = awsConn.checkPassword(username, password);
+			usrRole = awsConn.getUsrRole(username);
+			
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,6 +114,7 @@ public class LoginBean extends FormsAbstractBean implements Serializable{
 		//set user as logged in for current session
 		HttpSession session = SessionBean.getSession();
 		session.setAttribute("username", username);
+		session.setAttribute("userRole", usrRole);
 		
 		//Get the Original URL form the external context
 		ExternalContext extContex = SessionBean.getExtContext();
@@ -132,6 +136,10 @@ public class LoginBean extends FormsAbstractBean implements Serializable{
 	
 	public String getRemoteUser() {
 		return (String) SessionBean.getSession().getAttribute("username");
+	}
+	
+	public String getUserRole() {
+		return (String) SessionBean.getSession().getAttribute("userRole");
 	}
 	
 

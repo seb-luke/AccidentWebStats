@@ -20,7 +20,8 @@
 			<b:navbarLinks>
 				<b:navLink rendered="#{not empty loginBean.remoteUser}" value="#{msg['navbar.dashboard']}" href="/Pages/admin/dashboard.xhtml"/>
 				<b:navLink rendered="#{not empty loginBean.remoteUser}" value="#{msg['navbar.addInfo']}" href="#"/>
-				<b:dropMenu rendered="#{not empty loginBean.remoteUser}"  value="#{msg['navbar.dropdown.label']}">
+				<b:dropMenu rendered="#{not empty loginBean.remoteUser &amp;&amp; loginBean.userRole == 'adm'}"  
+						value="#{msg['navbar.dropdown.label']}">
 					<b:navLink value="#{msg['navbar.dropdown.createUser']}" href="#"/>
 					<b:navLink value="#{msg['navbar.dropdown.listUsers']}" href="#"/>
 					<b:navLink value="#{msg['navbar.dropdown.addSecQ']}" href="#"/>
@@ -33,7 +34,7 @@
 					<b:navLink value="English" />
 					<b:navLink value="Română"/>
 				</b:dropMenu>
-				<b:navLink rendered="#{empty loginBean.remoteUser}" value="#{msg['navbar.login']}" href="#"/>
+				<b:navLink rendered="#{empty loginBean.remoteUser}" value="#{msg['navbar.login']}" outcome="login"/>
 				<b:dropMenu rendered="#{not empty loginBean.remoteUser}" value="#{loginBean.remoteUser}" >
 					<b:navLink value="#{msg['navbar.changeSettings']}" href="#"/>
 					<b:navLink value="#{msg['navbar.logout']}" outcome="logout" />

@@ -2,6 +2,23 @@
 
 .body{
 	font-family: sans-serif;
+	background: #e3e3e3;
+	font-family: helvetica;
+	font-size: 14px;
+	text-align: center;
+}
+div{
+	display: block;
+}
+
+#content{
+	max-width: 1170px;
+	height: auto;
+	margin: 0px auto;
+	padding: 10px;
+	border: 1px solid #F2F2F2;
+	overflow: hidden;
+	background-color: #eee;
 }
 
 .pageContainer{

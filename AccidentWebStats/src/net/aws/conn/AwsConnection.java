@@ -272,6 +272,25 @@ public class AwsConnection {
 		
 		return b;
 	}
+	
+	
+	public String getUsrRole(String username) throws IOException, SQLException {
+		String usrRole = "usr";
+		String query_key = "get_usr_role";
+		
+		String query = Queries.getQuery(query_key);
+		setPreparedStatement(query);
+		
+		preStatement.setString(1, username);
+		result = preStatement.executeQuery();
+		
+		if(!result.next()) {
+			throw new SQLException("ResultSet came back empty after querying after the user role");
+		}
+		
+		usrRole = result.getString("permissions");
+		return usrRole;
+	}
 
 
 	/**
@@ -289,6 +308,9 @@ public class AwsConnection {
 			e.printStackTrace();
 		}		
 	}
+
+
+
 
 
 
