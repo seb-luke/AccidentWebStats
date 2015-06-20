@@ -29,8 +29,12 @@
 			</b:navbarLinks>
 			
 			<b:navbarLinks pull="right">
+				<b:dropMenu value="#{msg['navbar.language.label']}">
+					<b:navLink value="English" />
+					<b:navLink value="Română"/>
+				</b:dropMenu>
 				<b:navLink value="#{msg['navbar.login']}" href="#"/>
-				<b:dropMenu value="Username" href="#" >
+				<b:dropMenu value="Username" >
 					<b:navLink value="#{msg['navbar.changeSettings']}" href="#"/>
 					<b:navLink value="#{msg['navbar.logout']}" href="#"/>
 				</b:dropMenu>
