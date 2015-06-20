@@ -27,15 +27,12 @@ public class AdminAuthFilter implements Filter {
 	 * 
 	 */
 	public AdminAuthFilter() {
-		// TODO Auto-generated constructor stub
+		// Nothing to do here
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.Filter#destroy()
-	 */
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
+		// Nothing to destroy
 
 	}
 

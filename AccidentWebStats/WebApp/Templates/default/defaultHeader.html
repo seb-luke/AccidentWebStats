@@ -18,9 +18,9 @@
 		
 		<b:navBar brand="#{msg['navbar.brand']}" brandHref="#{request.contextPath}" static="true" inverse="true">
 			<b:navbarLinks>
-				<b:navLink value="#{msg['navbar.dashboard']}" href="/Pages/admin/dashboard.xhtml"/>
-				<b:navLink value="#{msg['navbar.addInfo']}" href="#"/>
-				<b:dropMenu value="#{msg['navbar.dropdown.label']}">
+				<b:navLink rendered="#{not empty loginBean.remoteUser}" value="#{msg['navbar.dashboard']}" href="/Pages/admin/dashboard.xhtml"/>
+				<b:navLink rendered="#{not empty loginBean.remoteUser}" value="#{msg['navbar.addInfo']}" href="#"/>
+				<b:dropMenu rendered="#{not empty loginBean.remoteUser}"  value="#{msg['navbar.dropdown.label']}">
 					<b:navLink value="#{msg['navbar.dropdown.createUser']}" href="#"/>
 					<b:navLink value="#{msg['navbar.dropdown.listUsers']}" href="#"/>
 					<b:navLink value="#{msg['navbar.dropdown.addSecQ']}" href="#"/>
@@ -33,10 +33,10 @@
 					<b:navLink value="English" />
 					<b:navLink value="Română"/>
 				</b:dropMenu>
-				<b:navLink value="#{msg['navbar.login']}" href="#"/>
-				<b:dropMenu value="Username" >
+				<b:navLink rendered="#{empty loginBean.remoteUser}" value="#{msg['navbar.login']}" href="#"/>
+				<b:dropMenu rendered="#{not empty loginBean.remoteUser}" value="#{loginBean.remoteUser}" >
 					<b:navLink value="#{msg['navbar.changeSettings']}" href="#"/>
-					<b:navLink value="#{msg['navbar.logout']}" href="#"/>
+					<b:navLink value="#{msg['navbar.logout']}" outcome="logout" />
 				</b:dropMenu>
 			</b:navbarLinks>
 		</b:navBar>
